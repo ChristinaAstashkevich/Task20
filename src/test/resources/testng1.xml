@@ -1,0 +1,11 @@
+<suite name="Suite">
+    <test name="Run only one test">
+        <classes>
+            <class name="MathUnitTest">
+                <methods>
+                    <include name=" additionMethodTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
