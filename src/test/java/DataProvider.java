@@ -39,10 +39,15 @@ public class DataProvider {
         };
     }
 
-    public static Object[][] readFile(File file) throws IOException {
-
+    public static Object[][] readFile(File file) {
         String text = null;
-        text = FileUtils.readFileToString(file);
+        Logger log = LogManager.getRootLogger();
+
+        try {
+            text = FileUtils.readFileToString(file);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
         String[] row = text.split(";");
 
         int rowNum = row.length;
@@ -62,17 +67,10 @@ public class DataProvider {
         return data;
     }
 
-
     public static Object[][] tryCatchReadFileException(String pathname) {
         Object[][] returnObjectArray = null;
-        Logger log = LogManager.getRootLogger();
-        File file;
-        try {
-            file = new File(pathname);
-            returnObjectArray = readFile(file);
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
+        File file = new File(pathname);
+        returnObjectArray = readFile(file);
         return returnObjectArray;
     }
 
